@@ -27,6 +27,6 @@ public class HelloController {
     @GetMapping("/")
     @ResponseBody
     public String landingPage() {
-        return "<h1>This is a Landing Page</h1>";
+        return "<h1>This is a Landing Page!</h1>";
     }
 }
