@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class MathController {
 
 
-    public final String subtractMap = "/subtract/{number1}/and/{number2}";
+    public final String subtractMap = "/subtract/{number1}/from/{number2}";
     public final String addMap = "/add/{number1}/and/{number2}";
     public final String multiplyMap = "/multiply/{number1}/and/{number2}";
-    public final String divideMap = "/divide/{number1}/and/{number2}";
+    public final String divideMap = "/divide/{number1}/by/{number2}";
+
 
     // add method
     @GetMapping(addMap)
