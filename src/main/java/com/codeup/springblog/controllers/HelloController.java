@@ -1,6 +1,7 @@
 package com.codeup.springblog.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -13,9 +14,10 @@ public class HelloController {
     }
 
     @GetMapping("/hello/{name}")
-    @ResponseBody
-    public String sayHello(@PathVariable String name) {
-        return "Hello there " + name + "!";
+//    @ResponseBody (Response body not necessary since were returning an html page from the resources using thymeleaf)
+    public String sayHello(@PathVariable String name, Model model) {
+        model.addAttribute("name", name);
+        return "hello";
     }
 
     @RequestMapping(path = "/increment/{number}", method = RequestMethod.GET)
@@ -29,4 +31,5 @@ public class HelloController {
     public String landingPage() {
         return "<h1>This is a Landing Page!</h1>";
     }
+
 }
