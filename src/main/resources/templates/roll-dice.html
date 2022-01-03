@@ -1,14 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<title>Roll Dice</title>
+	<style>
+		a {
+			margin: 1rem;
+			font-size: xx-large;
+		}
+	</style>
 </head>
 <body>
-<h1>Guess a number below.</h1>
-<form action="/roll-dice" method="post">
-	<input type="text" name="number">
-	<button>Guess</button>
-</form>
+	<h1>Guess a number below.</h1>
+	<div style="display: flex">
+		<a href="roll-dice/1" th:name="number">1</a>
+		<a href="roll-dice/2" th:name="number">2</a>
+		<a href="roll-dice/3" th:name="number">3</a>
+		<a href="roll-dice/4" th:name="number">4</a>
+		<a href="roll-dice/5" th:name="number">5</a>
+		<a href="roll-dice/6" th:name="number">6</a>
+	</div>
+
+
 </body>
 </html>
