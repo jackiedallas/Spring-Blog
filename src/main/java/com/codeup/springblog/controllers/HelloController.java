@@ -32,4 +32,15 @@ public class HelloController {
         return "<h1>This is a Landing Page!</h1>";
     }
 
+    @GetMapping("/join")
+    public String showJoinForm() {
+        return "join";
+    }
+
+    @PostMapping("/join")
+    public String joinCohort(@RequestParam(name = "cohort") String cohort, Model model) {
+        model.addAttribute("cohort", "Welcome to " + cohort + "!");
+        return "join";
+    }
+
 }
