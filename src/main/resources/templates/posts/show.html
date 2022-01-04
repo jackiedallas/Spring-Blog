@@ -1,10 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<title>Title</title>
+	<title>View All Posts</title>
 </head>
 <body>
-
+	<h1>All Posts:</h1>
+	<div th:each="posts: ${posts}">
+		<h3 th:text="${posts.getTitle()}"></h3>
+		<p th:text="${posts.getBody()}"></p>
+		<div style="display: flex">
+			<form action="">
+				<button>Edit</button>
+			</form>
+			<form style="margin-left: 1rem" th:action="@{'/delete-by-id/' + ${posts.getId()}}" method="post">
+				<button type="submit">Delete</button>
+			</form>
+		</div>
+		
+	</div>
 </body>
 </html>

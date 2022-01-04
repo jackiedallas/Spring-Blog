@@ -19,29 +19,17 @@ public class PostController {
     public PostController(PostRepository postDao) {this.postDao = postDao;}
 
     // view posts
-    @GetMapping("/posts")
-    @ResponseBody
+    @GetMapping("/posts/show")
     public String viewPosts(Model model) {
-        ArrayList<Post> posts = new ArrayList<>();
-
-        Post post1 = new Post("Title 1", "Body 1");
-        Post post2 = new Post("Title 2", "Body 2");
-
-        posts.add(post1);
-        posts.add(post2);
-
-        model.addAttribute("posts", posts);
-
-        return "/" + posts;
+        model.addAttribute("posts", postDao.findAll());
+        return "posts/show";
     }
 
     // view individual post
-    @GetMapping("/posts/{id}")
-    @ResponseBody
-    public String viewSinglePost(@PathVariable int id, Model model) {
-        Post post = new Post("Title", "Body");
-        model.addAttribute("post", post);
-        return post + "/" + id;
+    @GetMapping("/posts/index/{id}")
+    public String viewSinglePost(@PathVariable Long id, Model model) {
+        model.addAttribute("id", postDao.findById(id));
+        return "posts/index";
     }
 
     // create posts
@@ -57,6 +45,15 @@ public class PostController {
     public String postPosts() {
         return "posts/create";
     }
+
+    // delete post by id
+    @PostMapping("/delete-by-id/{id}")
+    public String deletePostById(@PathVariable long id) {
+        System.out.println(id);
+        postDao.deleteById(id);
+        return "redirect:/posts/show";
+    }
+
 
 
 }

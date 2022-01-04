@@ -16,6 +16,10 @@ public class Post {
 
     public Post() {}
 
+    public Long getId() {
+        return id;
+    }
+
     public String getBody() {
         return body;
     }
