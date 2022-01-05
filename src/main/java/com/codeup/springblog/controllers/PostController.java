@@ -25,7 +25,8 @@ public class PostController {
     // view individual post
     @GetMapping("/posts/index/{id}")
     public String viewSinglePost(@PathVariable Long id, Model model) {
-        model.addAttribute("id", postDao.findById(id));
+        Post post = postDao.getById(id);
+        model.addAttribute("post", post);
         return "posts/index";
     }
 
@@ -49,6 +50,22 @@ public class PostController {
     public String deletePostById(@PathVariable long id) {
         System.out.println(id);
         postDao.deleteById(id);
+        return "redirect:/posts/show";
+    }
+
+    // view edit post
+    @GetMapping("posts/edit/{id}")
+    public String viewEditPost(@PathVariable Long id, Model model) {
+        Post post = postDao.getById(id);
+        model.addAttribute("post", post);
+        return "posts/edit";
+    }
+
+    // edit post
+    @PostMapping("/edit")
+    public String editPost(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body) {
+        Post editPost = new Post(title, body);
+        postDao.save(editPost);
         return "redirect:/posts/show";
     }
 

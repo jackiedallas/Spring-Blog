@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="partials :: head">
 	<meta charset="UTF-8">
 	<title>View Single Post</title>
 </head>
 <body>
+	<nav th:replace="partials :: navbar"></nav>
 	<h1>Single Post:</h1>
-	<div th:each="id: ${id}">
-		<h3 th:text="${id.getTitle()}"></h3>
-		<p th:text="${id.getBody()}"></p>
+	<div th:each="post: ${post}">
+		<h3 th:text="${post.getTitle()}"></h3>
+		<p th:text="${post.getBody()}"></p>
 		<div style="display: flex">
 			<form action="">
-				<button>Edit</button>
+				<button class="btn btn-dark">Edit</button>
 			</form>
 			<form style="margin-left: 1rem" action="">
-				<button>Delete</button>
+				<button class="btn btn-dark">Delete</button>
 			</form>
 		</div>
 	</div>
 	
-	
+	<div th:replace="partials :: scripts"></div>
 </body>
 </html>

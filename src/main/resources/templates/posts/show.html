@@ -8,10 +8,12 @@
 	<nav th:replace="partials :: navbar"></nav>
 	<h1>All Posts:</h1>
 	<div th:each="posts: ${posts}">
-		<h3 th:text="${posts.getTitle()}"></h3>
+		<a th:href="@{'/posts/index/' + ${posts.getId()}}">
+			<h3 th:text="${posts.getTitle()}"></h3>
+		</a>
 		<p th:text="${posts.getBody()}"></p>
 		<div style="display: flex">
-			<form action="" method="">
+			<form th:action="@{'/posts/edit/' + ${posts.getId()}}" method="get">
 				<button type="submit" class="btn btn-dark">Edit</button>
 			</form>
 			<form style="margin-left: 1rem" th:action="@{'/delete-by-id/' + ${posts.getId()}}" method="post">
