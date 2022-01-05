@@ -11,11 +11,11 @@
 		<h3 th:text="${posts.getTitle()}"></h3>
 		<p th:text="${posts.getBody()}"></p>
 		<div style="display: flex">
-			<form action="">
-				<button>Edit</button>
+			<form action="" method="">
+				<button type="submit" class="btn btn-dark">Edit</button>
 			</form>
 			<form style="margin-left: 1rem" th:action="@{'/delete-by-id/' + ${posts.getId()}}" method="post">
-				<button type="submit">Delete</button>
+				<button class="btn btn-dark" type="submit">Delete</button>
 			</form>
 		</div>
 		

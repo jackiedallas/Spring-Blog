@@ -4,10 +4,7 @@ import com.codeup.springblog.interfaces.PostRepository;
 import com.codeup.springblog.model.Post;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -32,18 +29,19 @@ public class PostController {
         return "posts/index";
     }
 
-    // create posts
+    // show create posts
     @GetMapping("/posts/create")
-    @ResponseBody
     public String createPost() {
         return "posts/create";
     }
 
     // create new post
     @PostMapping("/posts/create")
-    @ResponseBody
-    public String postPosts() {
-        return "posts/create";
+    public String postPosts(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body) {
+         Post newPost = new Post(title, body);
+         postDao.save(newPost);
+
+        return "redirect:/posts/show";
     }
 
     // delete post by id
