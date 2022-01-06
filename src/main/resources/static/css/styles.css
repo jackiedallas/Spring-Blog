@@ -3,12 +3,6 @@ body {
 }
 
 /*navbar edits*/
-/*.navbar-brand {*/
-/*	font-size: 30px !important;*/
-/*	font-weight: bold;*/
-/*	font-family: "Comic Sans MS", serif;*/
-/*	color: forestgreen !important;*/
-/*}*/
 .nav-item {
 	font-size: 20px;
 }
@@ -41,6 +35,9 @@ a {
 }
 a:hover {
 	text-decoration: none;
+}
+.post-container {
+	margin-top: 2.5rem;
 }
 .post-margin {
 	margin-top: 1rem;
