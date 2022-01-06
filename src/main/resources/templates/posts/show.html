@@ -15,31 +15,36 @@
 			<div class="date"></div>
 		</div>
 		<div class="container post-container">
-			<div class="post-margin" th:each="posts: ${posts}">
-				<a th:href="@{'/posts/index/' + ${posts.getId()}}">
-					<h5 th:text="${posts.getTitle()}"></h5>
-				</a>
-				<p class="body" th:text="${posts.getBody()}"></p>
-				<div class="dropdown">
-					<button class="btn icon dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<i class="bi bi-gear-fill"></i>
-					</button>
-					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						<form class="form-bg" th:action="@{'/posts/edit/' + ${posts.getId()}}" method="get">
-							<button type="submit" class="btn">Edit</button>
-						</form>
-						<form class="form-bg" th:action="@{'/delete-by-id/' + ${posts.getId()}}" method="post">
-							<button class="btn" type="submit">Delete</button>
-						</form>
-<!--						<a class="dropdown-item" th:action="@{'/delete-by-id/' + ${posts.getId()}}" th:method="post">Delete</a>-->
+			<div th:each="user: ${user}">
+				<div class="post-margin" th:each="posts: ${posts}">
+					<div class="d-flex">
+						<span style="margin-right: .5rem">Author:</span><p th:text="${user.getEmail()}"></p>
 					</div>
-					<hr>
+					<a th:href="@{'/posts/index/' + ${posts.getId()}}">
+						<h5 th:text="${posts.getTitle()}"></h5>
+					</a>
+					<p class="body" th:text="${posts.getBody()}"></p>
+					<div class="dropdown">
+						<button class="btn icon dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="bi bi-gear-fill"></i>
+						</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<form class="form-bg" th:action="@{'/posts/edit/' + ${posts.getId()}}" method="get">
+								<button type="submit" class="btn">Edit</button>
+							</form>
+							<form class="form-bg" th:action="@{'/delete-by-id/' + ${posts.getId()}}" method="post">
+								<button class="btn" type="submit">Delete</button>
+							</form>
+							<!--						<a class="dropdown-item" th:action="@{'/delete-by-id/' + ${posts.getId()}}" th:method="post">Delete</a>-->
+						</div>
+						<hr>
+					</div>
+					<!--				<div style="display: flex">-->
+					<!--					-->
+					<!--					-->
+					<!--				</div>-->
+				
 				</div>
-<!--				<div style="display: flex">-->
-<!--					-->
-<!--					-->
-<!--				</div>-->
-			
 			</div>
 		</div>
 	</div>

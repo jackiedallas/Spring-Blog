@@ -1,6 +1,7 @@
 package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.interfaces.PostRepository;
+import com.codeup.springblog.interfaces.UserRepository;
 import com.codeup.springblog.model.Post;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,11 +10,13 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class PostController {
     private final PostRepository postDao;
-    public PostController(PostRepository postDao) {this.postDao = postDao;}
+    private final UserRepository userDao;
+    public PostController(PostRepository postDao, UserRepository userDao) {this.postDao = postDao; this.userDao = userDao;}
 
     // view posts
     @GetMapping("/posts/show")
     public String viewPosts(Model model) {
+        model.addAttribute("user", userDao.findAll());
         model.addAttribute("posts", postDao.findAll());
         return "posts/show";
     }

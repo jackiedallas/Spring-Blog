@@ -8,7 +8,6 @@ import java.util.List;
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Long id;
     @Column(length = 50, nullable = false)
     private String title;
@@ -30,6 +29,7 @@ public class Post {
         this.body = body;
         this.id = id;
     }
+
 
     public Long getId() {
         return id;
