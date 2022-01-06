@@ -1,20 +1,39 @@
-/*navbar edits*/
-.spring-blog-nav {
-	font-size: 30px;
-	font-weight: bold;
+body {
+	font-family: "Comic Sans MS", serif;
 }
+
+/*navbar edits*/
+/*.navbar-brand {*/
+/*	font-size: 30px !important;*/
+/*	font-weight: bold;*/
+/*	font-family: "Comic Sans MS", serif;*/
+/*	color: forestgreen !important;*/
+/*}*/
 .nav-item {
 	font-size: 20px;
+}
+a.navbar-brand {
+	color: #99c94f !important;
+	font-size: 30px;
+	font-weight: bold;
 }
 /*navbar edits end*/
 
 /*header edits*/
 .header-container {
-	justify-content: center;
+	display: flex;
 }
 .main-header {
 
 }
+.date {
+	margin-left: auto;
+	font-size: 18px;
+}
+.leaf {
+	margin: 0 auto 3rem;
+}
+/*header edits end*/
 
 /*content edits*/
 a {

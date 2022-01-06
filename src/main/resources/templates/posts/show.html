@@ -7,8 +7,12 @@
 <body>
 	<nav th:replace="partials :: navbar"></nav>
 	<div class="container mt-5">
+		<div class="d-flex">
+			<img class="leaf" th:src="@{/images/leaf-icon.png}" alt="leaf">
+		</div>
 		<div class="container header-container">
 			<h3 class="main-header">Activity</h3>
+			<div class="date"></div>
 		</div>
 		<div class="container post-container">
 			<div class="post-margin" th:each="posts: ${posts}">
@@ -16,7 +20,6 @@
 					<h5 th:text="${posts.getTitle()}"></h5>
 				</a>
 				<p class="body" th:text="${posts.getBody()}"></p>
-				
 				<div class="dropdown">
 					<button class="btn icon dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						<i class="bi bi-gear-fill"></i>
