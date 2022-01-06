@@ -11,7 +11,7 @@
 		<h3 th:text="${post.getTitle()}"></h3>
 		<p th:text="${post.getBody()}"></p>
 		<div style="display: flex">
-			<form action="">
+			<form th:action="@{'/posts/edit/' + ${post.getId()}}" method="get">
 				<button class="btn btn-dark">Edit</button>
 			</form>
 			<form style="margin-left: 1rem" action="">

@@ -6,18 +6,21 @@
 </head>
 <body>
 	<nav th:replace="partials :: navbar"></nav>
-	<h1>Edit Post:</h1>
-	<div th:each="post: ${post}">
-		<form th:replace="partials :: postForm" action="/edit" method="post">
+	
+	<div class="container">
+		<h1>Edit Post:</h1>
+		<form th:method="post" th:object="${post}" th:value="${post.getId()}" th:action="@{'/edit/' + ${id}}">
+			<input type="hidden" name="id" th:field="*{id}">
 			<div class="form-group">
 				<label for="title">Title</label>
-				<input type="text" name="title" id="title" th:placeholder="${post.getTitle()}">
+				<input class="form-control" type="text" name="title" id="title" th:field="*{title}" th:value="title">
 			</div>
 			<div class="form-group">
 				<label for="body">Body</label>
-				<input type="text" name="body" id="body" th:placeholder="${post.getBody()}">
+				<textarea class="form-control" name="body" id="body" cols="30" rows="10" th:field="*{body}"></textarea>
 			</div>
-			<button type="submit" class="btn btn-primary">Update</button>
+			
+			<button class="btn btn-primary" type="submit">Update</button>
 		</form>
 	</div>
 

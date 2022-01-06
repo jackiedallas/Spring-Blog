@@ -6,22 +6,41 @@
 </head>
 <body>
 	<nav th:replace="partials :: navbar"></nav>
-	<h1>All Posts:</h1>
-	<div th:each="posts: ${posts}">
-		<a th:href="@{'/posts/index/' + ${posts.getId()}}">
-			<h3 th:text="${posts.getTitle()}"></h3>
-		</a>
-		<p th:text="${posts.getBody()}"></p>
-		<div style="display: flex">
-			<form th:action="@{'/posts/edit/' + ${posts.getId()}}" method="get">
-				<button type="submit" class="btn btn-dark">Edit</button>
-			</form>
-			<form style="margin-left: 1rem" th:action="@{'/delete-by-id/' + ${posts.getId()}}" method="post">
-				<button class="btn btn-dark" type="submit">Delete</button>
-			</form>
+	<div class="container mt-5">
+		<div class="container header-container">
+			<h3 class="main-header">Activity</h3>
 		</div>
-		
+		<div class="container post-container">
+			<div class="post-margin" th:each="posts: ${posts}">
+				<a th:href="@{'/posts/index/' + ${posts.getId()}}">
+					<h5 th:text="${posts.getTitle()}"></h5>
+				</a>
+				<p class="body" th:text="${posts.getBody()}"></p>
+				
+				<div class="dropdown">
+					<button class="btn icon dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<i class="bi bi-gear-fill"></i>
+					</button>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						<form class="form-bg" th:action="@{'/posts/edit/' + ${posts.getId()}}" method="get">
+							<button type="submit" class="btn">Edit</button>
+						</form>
+						<form class="form-bg" th:action="@{'/delete-by-id/' + ${posts.getId()}}" method="post">
+							<button class="btn" type="submit">Delete</button>
+						</form>
+<!--						<a class="dropdown-item" th:action="@{'/delete-by-id/' + ${posts.getId()}}" th:method="post">Delete</a>-->
+					</div>
+					<hr>
+				</div>
+<!--				<div style="display: flex">-->
+<!--					-->
+<!--					-->
+<!--				</div>-->
+			
+			</div>
+		</div>
 	</div>
+
 	<div th:replace="partials :: scripts"></div>
 </body>
 </html>
