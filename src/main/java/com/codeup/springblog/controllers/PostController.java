@@ -63,9 +63,9 @@ public class PostController {
 
     // edit post
     @PostMapping("/edit/{id}")
-    public String editPost(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body, @PathVariable("id") Long id) {
-        Post editPost = new Post(title, body);
-        postDao.save(editPost);
+    public String editPost(@PathVariable("id") Long id, @RequestParam(name = "title") String title, @RequestParam(name = "body") String body) {
+        Post editPost = new Post(title, body, id);
+        postDao.saveAndFlush(editPost);
         return "redirect:/posts/show";
     }
 

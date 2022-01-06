@@ -9,7 +9,7 @@
 	
 	<div class="container">
 		<h1>Edit Post:</h1>
-		<form th:method="post" th:object="${post}" th:value="${post.getId()}" th:action="@{'/edit/' + ${id}}">
+		<form th:method="post" th:object="${post}" th:value="${id}" th:action="@{'/edit/' + ${id}}">
 			<input type="hidden" name="id" th:field="*{id}">
 			<div class="form-group">
 				<label for="title">Title</label>
