@@ -6,19 +6,10 @@
 </head>
 <body>
 	<nav th:replace="partials :: navbar"></nav>
-	<h1>Single Post:</h1>
-	<div th:each="post: ${post}">
-		<h3 th:text="${post.getTitle()}"></h3>
-		<p th:text="${post.getBody()}"></p>
-		<div style="display: flex">
-			<form th:action="@{'/posts/edit/' + ${post.getId()}}" method="get">
-				<button class="btn btn-dark">Edit</button>
-			</form>
-			<form style="margin-left: 1rem" action="">
-				<button class="btn btn-dark">Delete</button>
-			</form>
-		</div>
+	<div th:replace="partials :: body-container">
+	
 	</div>
+	
 	
 	<div th:replace="partials :: scripts"></div>
 </body>

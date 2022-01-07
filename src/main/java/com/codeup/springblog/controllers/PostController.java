@@ -3,6 +3,7 @@ package com.codeup.springblog.controllers;
 import com.codeup.springblog.interfaces.PostRepository;
 import com.codeup.springblog.interfaces.UserRepository;
 import com.codeup.springblog.model.Post;
+import com.codeup.springblog.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,30 +26,24 @@ public class PostController {
     @GetMapping("/posts/index/{id}")
     public String viewSinglePost(@PathVariable Long id, Model model) {
         Post post = postDao.getById(id);
+        User user = userDao.getById(id);
         model.addAttribute("post", post);
         return "posts/index";
     }
 
     // show create posts
     @GetMapping("/posts/create")
-    public String createPost() {
+    public String createPost(Model model) {
+        model.addAttribute("post", new Post());
         return "posts/create";
     }
 
     // create new post
     @PostMapping("/posts/create")
-    public String postPosts(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body) {
-         Post newPost = new Post(title, body);
-         postDao.save(newPost);
+    public String postPosts(@ModelAttribute Post post) {
+         post.setUsers(userDao.getById(1L));
+         postDao.save(post);
 
-        return "redirect:/posts/show";
-    }
-
-    // delete post by id
-    @PostMapping("/delete-by-id/{id}")
-    public String deletePostById(@PathVariable long id) {
-        System.out.println(id);
-        postDao.deleteById(id);
         return "redirect:/posts/show";
     }
 
@@ -69,5 +64,12 @@ public class PostController {
     }
 
 
+    // delete post by id
+    @PostMapping("/delete-by-id/{id}")
+    public String deletePostById(@PathVariable long id) {
+        System.out.println(id);
+        postDao.deleteById(id);
+        return "redirect:/posts/show";
+    }
 
 }

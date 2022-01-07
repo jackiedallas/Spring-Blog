@@ -19,13 +19,10 @@ public class User {
     @Column(nullable = false, length = 100)
     private String password;
 
-    @ManyToMany
-    @JoinTable(
-            name = "users_posts",
-            joinColumns = {@JoinColumn(name = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "post_id")}
-    )
+    @OneToMany(mappedBy = "users")
     private List<Post> posts;
+
+
 
     public long getId() {
         return id;

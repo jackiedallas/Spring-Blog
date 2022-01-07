@@ -14,8 +14,10 @@ public class Post {
     @Column(length = 1000, nullable = false)
     private String body;
 
-    @ManyToMany(mappedBy = "posts")
-    private List<User> users;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User users;
 
     public Post() {}
 
@@ -24,12 +26,12 @@ public class Post {
         this.body = body;
     }
 
+
     public Post(String title, String body, Long id) {
         this.title = title;
         this.body = body;
         this.id = id;
     }
-
 
     public Long getId() {
         return id;
@@ -55,11 +57,11 @@ public class Post {
         this.body = body;
     }
 
-    public List<User> getUsers() {
+    public User getUsers() {
         return users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(User users) {
         this.users = users;
     }
 }
