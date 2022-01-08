@@ -3,7 +3,6 @@ package com.codeup.springblog.controllers;
 import com.codeup.springblog.interfaces.PostRepository;
 import com.codeup.springblog.interfaces.UserRepository;
 import com.codeup.springblog.model.Post;
-import com.codeup.springblog.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,9 +24,10 @@ public class PostController {
     // view individual post
     @GetMapping("/posts/index/{id}")
     public String viewSinglePost(@PathVariable Long id, Model model) {
-        Post post = postDao.getById(id);
-        User user = userDao.getById(id);
-        model.addAttribute("post", post);
+
+        Post singlePost = postDao.getById(id);
+        model.addAttribute("user", singlePost.getUsers());
+        model.addAttribute("post", singlePost);
         return "posts/index";
     }
 
@@ -57,12 +57,10 @@ public class PostController {
 
     // edit post
     @PostMapping("/edit/{id}")
-    public String editPost(@PathVariable("id") Long id, @RequestParam(name = "title") String title, @RequestParam(name = "body") String body) {
-        Post editPost = new Post(title, body, id);
-        postDao.save(editPost);
+    public String editPost(@ModelAttribute Post post) {
+        postDao.save(post);
         return "redirect:/posts/show";
     }
-
 
     // delete post by id
     @PostMapping("/delete-by-id/{id}")
@@ -71,5 +69,8 @@ public class PostController {
         postDao.deleteById(id);
         return "redirect:/posts/show";
     }
+
+
+
 
 }
