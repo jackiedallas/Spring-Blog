@@ -12,6 +12,10 @@ public class PostController {
     private final PostRepository postDao;
     private final UserRepository userDao;
     public PostController(PostRepository postDao, UserRepository userDao) {this.postDao = postDao; this.userDao = userDao;}
+    public void editCreate(Post post) {
+        post.setUsers(userDao.getById(1L));
+        postDao.save(post);
+    }
 
     // view posts
     @GetMapping("/posts/show")
@@ -41,9 +45,7 @@ public class PostController {
     // create new post
     @PostMapping("/posts/create")
     public String postPosts(@ModelAttribute Post post) {
-         post.setUsers(userDao.getById(1L));
-         postDao.save(post);
-
+        editCreate(post);
         return "redirect:/posts/show";
     }
 
@@ -58,7 +60,7 @@ public class PostController {
     // edit post
     @PostMapping("/edit/{id}")
     public String editPost(@ModelAttribute Post post) {
-        postDao.save(post);
+        editCreate(post);
         return "redirect:/posts/show";
     }
 
