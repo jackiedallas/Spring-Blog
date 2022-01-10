@@ -96,6 +96,12 @@ public class PostController {
         return "redirect:/posts/show";
     }
 
+    // login
+    @GetMapping("/posts/login")
+    public String login() {
+        return "posts/login";
+    }
+
 
 
 

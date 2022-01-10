@@ -1,6 +1,9 @@
 body {
 	font-family: "Comic Sans MS", serif;
 }
+.btn {
+	padding: 5px !important;
+}
 
 /*navbar edits*/
 .nav-item {
