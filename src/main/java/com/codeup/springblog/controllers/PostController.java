@@ -5,6 +5,7 @@ import com.codeup.springblog.repositories.UserRepository;
 import com.codeup.springblog.models.Post;
 import com.codeup.springblog.models.User;
 import com.codeup.springblog.services.EmailService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,29 +17,12 @@ public class PostController {
     private final UserRepository userDao;
     private final EmailService emailService;
     public PostController(PostRepository postDao, UserRepository userDao, EmailService emailService) {this.postDao = postDao; this.userDao = userDao; this.emailService = emailService;}
-    public void editCreate(Post post) {
-        post.setUsers(userDao.getById(1L));
-        postDao.save(post);
-    }
 
 
-    // view create user
-    @GetMapping("/posts/register")
-    public String viewCreateUser(Model model) {
-        model.addAttribute("user", new User());
-        return "posts/register";
-    }
-
-    // create user
-    @PostMapping("/posts/register")
-    public String createUser(@ModelAttribute User user) {
-        userDao.save(user);
-        return "redirect:/posts/show";
-    }
 
 
     // view posts
-    @GetMapping("/posts/show")
+    @GetMapping("/posts")
     public String viewPosts(Model model) {
         model.addAttribute("user", userDao.findAll());
         model.addAttribute("posts", postDao.findAll());
@@ -56,7 +40,7 @@ public class PostController {
     }
 
     // show create posts
-    @GetMapping("/posts/create")
+    @GetMapping("/create")
     public String createPost(Model model) {
         model.addAttribute("post", new Post());
         return "posts/create";
@@ -65,7 +49,9 @@ public class PostController {
     // create new post
     @PostMapping("/posts/create")
     public String postPosts(@ModelAttribute Post post) {
-        editCreate(post);
+        User postCreator = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        post.setUsers(postCreator);
+
         String emailSubject = post.getUsers().getUsername() + ", your post has been created!";
         String emailBody = "Congrats, your latest blog is up and ready to view on Spring Blog, it read: " + post.getBody();
 
@@ -84,7 +70,9 @@ public class PostController {
     // edit post
     @PostMapping("/edit/{id}")
     public String editPost(@ModelAttribute Post post) {
-        editCreate(post);
+        User postCreator = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        post.setUsers(postCreator);
+        postDao.save(post);
         return "redirect:/posts/show";
     }
 
@@ -96,11 +84,7 @@ public class PostController {
         return "redirect:/posts/show";
     }
 
-    // login
-    @GetMapping("/posts/login")
-    public String login() {
-        return "posts/login";
-    }
+
 
 
 
