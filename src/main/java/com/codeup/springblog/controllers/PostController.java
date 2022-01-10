@@ -3,6 +3,7 @@ package com.codeup.springblog.controllers;
 import com.codeup.springblog.interfaces.PostRepository;
 import com.codeup.springblog.interfaces.UserRepository;
 import com.codeup.springblog.model.Post;
+import com.codeup.springblog.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,22 @@ public class PostController {
         post.setUsers(userDao.getById(1L));
         postDao.save(post);
     }
+
+
+    // view create user
+    @GetMapping("/posts/register")
+    public String viewCreateUser(Model model) {
+        model.addAttribute("user", new User());
+        return "posts/register";
+    }
+
+    // create user
+    @PostMapping("/posts/register")
+    public String createUser(@ModelAttribute User user) {
+        userDao.save(user);
+        return "redirect:/posts/show";
+    }
+
 
     // view posts
     @GetMapping("/posts/show")
