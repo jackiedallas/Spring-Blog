@@ -19,9 +19,17 @@ public class User {
     @Column(nullable = false, length = 100)
     private String password;
 
+    public User(User copy) {
+        id = copy.id; // This line is SUPER important! Many things won't work if it's absent
+        email = copy.email;
+        username = copy.username;
+        password = copy.password;
+    }
+
     @OneToMany(mappedBy = "users")
     private List<Post> posts;
 
+    public User() {}
 
 
     public long getId() {
